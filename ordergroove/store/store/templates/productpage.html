@@ -1,0 +1,27 @@
+{% load catalog_filters %}
+ 
+{% load staticfiles %} 
+
+{% block content %}
+	<div class="product_image" >
+		<img src="{{ STATIC_URL }}images/{{p.image}}" alt={{p.name}}/><br />
+	</div>
+	<h1><span property="v:name">{{ p.name }}</span></h1>
+	<br />
+	Price: {{ p.price|currency }} <br />
+	{% if p.old_price %} Was: <del>{{ p.old_price|currency }}</del><br />
+	{% endif %}
+	<form method="post" action="." class="cart">{% csrf_token %}
+		{{ form.as_p }}
+		<br />
+		Qty <input type="number" name="qty" value = "1"> <br />
+		<button type="submit" value="{{p.id}}" name= "product_id" />Add to Cart</button>
+	</form>
+
+	<div class="cb"><br /><br /></div>
+	<h2>Product Description</h2>
+	<span property="v:description">{{ p.description }}</span>
+<div class="cb"><br /><br /></div>
+	<hr>
+	<br /><br /><br />
+	{% endblock %}

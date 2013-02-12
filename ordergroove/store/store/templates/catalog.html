@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block site_wrapper %}
+<div id="main">
+	<div id="banner">
+		<div class="bannerIEPadder">
+			{{store_name}}
+			<div class="cart_box">
+			{% load static %}<a href = "/{{store_subdomain}}/shoppingcart/"> <img src="{% static "images/shopping_cart.png" %}" 
+			alt="Shopping Cart" height = 40px width = 40px /></a>
+				
+			</div>
+		
+		</div>
+	</div>
+	<br /><br />
+	{% if message %}
+		<h4>{{message}}</h4>
+		<hr>
+	{% endif %}
+	{% for p in store_products %}
+	<p>{% include 'productpage.html' %}</p>
+	{% endfor %}
+
+	<br /><div id="checkout"><a href = "/{{store_subdomain}}/shoppingcart/">Checkout</a></div><br />
+</div>
+
+{% endblock %}

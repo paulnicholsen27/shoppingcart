@@ -1,0 +1,31 @@
+{% extends "catalog.html" %}
+
+{% load catalog_filters %}
+ 
+{% load staticfiles %} 
+
+{% block site_wrapper %}
+
+<h1>{{ store_name }}</h1><br />
+    
+<table border="1">
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+Cart.items: {{cart.items}} <br />
+Cart: {{cart}} <br />
+Cart.keys: {{cart.keys}} <br />
+{% for key, value in cart.items %}
+    <tr>
+        <td><span property="v:name">{{ key.name }}</span></td>
+        <td>{{ key.price }}</td>
+        <td>{{ value}}</td>
+        <td>{% {{key.price}} * {{value}} %}<td>
+    </tr>
+    {% endfor %} 
+</table>
+
+<div id="checkout"><a href = "/{{store_subdomain}}/checkout/">Submit Order</a></div><br />
+
+{% endblock %}
